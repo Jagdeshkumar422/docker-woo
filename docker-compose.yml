@@ -1,0 +1,66 @@
+version: '3.1'
+
+services:
+  mysql:
+    image: mysql:8.0
+    restart: always
+    container_name: mysql_db
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: wordpress
+    volumes:
+      - db_data:/var/lib/mysql
+
+  wordpress:
+    image: wordpress
+    restart: always
+    container_name: wordpress_app
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: mysql
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    depends_on:
+      - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    container_name: phpmyadmin_ui
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: mysql
+      MYSQL_ROOT_PASSWORD: root
+    depends_on:
+      - mysql
+
+  django:
+    build: ./django_api
+    container_name: django_app
+    restart: always
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./django_api:/app
+    depends_on:
+      - mysql
+    environment:
+      DATABASE_NAME: wordpress
+      DATABASE_USER: wordpress
+      DATABASE_PASSWORD: wordpress
+      DATABASE_HOST: mysql
+      DATABASE_PORT: 3306
+    working_dir: /app
+    command: >
+      sh -c "sleep 20 && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+
+volumes:
+  db_data:
+    driver: local
