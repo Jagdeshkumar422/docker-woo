@@ -1,0 +1,55 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Django-specific
+*.log
+*.sqlite3
+db.sqlite3
+/media/
+/staticfiles/
+local_settings.py
+*.pyc
+
+# Ignore secret keys & environment variables
+.env
+*.env
+
+# VSCode & JetBrains IDEs
+.vscode/
+.idea/
+
+# MacOS system files
+.DS_Store
+
+# Node modules (if frontend is included)
+node_modules/
+
+# Docker
+*.pid
+docker-compose.override.yml
+
+# WordPress-specific
+wordpress/wp-content/uploads/
+wordpress/wp-content/cache/
+wordpress/wp-config.php
+
+# Ignore dependencies & compiled files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+coverage/
+dist/
+build/
+
+# Ignore database dumps
+*.sql
+*.tar.gz
+*.zip

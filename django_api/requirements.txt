@@ -1,2 +1,7 @@
 Django
 mysqlclient
+pymysql
+djangorestframework
+woocommerce
+django-cors-headers
+cryptography

@@ -7,7 +7,6 @@ define('DB_HOST', 'mysql'); // The service name of MySQL in Docker
 
 define('DB_CHARSET', 'utf8');
 define('DB_COLLATE', '');
-
 // Security keys (generate new ones from https://api.wordpress.org/secret-key/1.1/salt/)
 define('AUTH_KEY',         'your_random_key_here');
 define('SECURE_AUTH_KEY',  'your_random_key_here');
